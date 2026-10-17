@@ -1,0 +1,3 @@
+- insert:
+    - id: codex-annotate
+      name: 'dsh-plugin-codex-annotate'

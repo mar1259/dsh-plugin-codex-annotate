@@ -1,0 +1,56 @@
+{
+  "name": "dsh-plugin-codex-annotate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Codex-style selection quote annotations for the DeepSeek Harness Web UI",
+  "license": "MIT",
+  "author": "mar1259",
+  "contributors": [
+    {
+      "name": "DeepSeek Harness Agent",
+      "email": "agent@dsh.invalid"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mar1259/dsh-plugin-codex-annotate.git"
+  },
+  "homepage": "https://github.com/mar1259/dsh-plugin-codex-annotate#readme",
+  "bugs": {
+    "url": "https://github.com/mar1259/dsh-plugin-codex-annotate/issues"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "codex",
+    "annotation",
+    "quote-reply"
+  ],
+  "type": "module",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  }
+}
