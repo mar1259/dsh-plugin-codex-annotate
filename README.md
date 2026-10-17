@@ -21,13 +21,35 @@
 
 ## 安装
 
+要求 DSH 已安装且 `dsh` 在 PATH 中。从 GitHub 直接安装：
+
 ```bash
-git clone https://github.com/mar1259/dsh-plugin-codex-annotate.git
+dsh plugin --profile desktop add github:mar1259/dsh-plugin-codex-annotate
 ```
 
-然后在 DSH 中把该目录作为 bundle 安装（插件管理器的 `install_bundle`，target 指向仓库目录）。安装会写入当前 profile，并对其所有会话生效；用 `remove_bundle` 卸载。
+`desktop` 是桌面版的 profile 名；Web 版通常用 `web`，换成你实际启动的 profile 即可。
+固定到某个 commit，避免仓库后续改动影响现有环境：
 
-> 客户端 bundle 更新后需要刷新页面（或重启 DSH）才会加载新的 JS 代际。
+```bash
+dsh plugin --profile desktop add github:mar1259/dsh-plugin-codex-annotate#<commit-sha>
+```
+
+本地 clone 安装：
+
+```bash
+git clone https://github.com/mar1259/dsh-plugin-codex-annotate.git
+dsh plugin --profile desktop add ./dsh-plugin-codex-annotate
+```
+
+卸载：
+
+```bash
+dsh plugin --profile desktop remove dsh-plugin-codex-annotate
+```
+
+本仓库是纯 JS，没有 `prepare` / `build` 脚本，git 安装不需要 pnpm 的 `allowBuilds` 许可。
+
+> 安装或更新客户端 bundle 后，刷新页面（或重启 DSH）才会加载新的 JS 代际。
 
 ## 使用
 
@@ -121,5 +143,11 @@ node --check index.js
 ## English
 
 Codex-style selection annotations for the DeepSeek Harness Web UI. Select text in an assistant reply, right-click, choose **Reply here**, write your note, and confirm — accumulate several notes as a `📎 N notes` chip inside the composer tool row, then send them all at once. The outgoing message quotes the exact location (message id, turn, block, section, character range or code lines) and is folded into an expandable attachment row inside the chat bubble.
+
+Install:
+
+```bash
+dsh plugin --profile desktop add github:mar1259/dsh-plugin-codex-annotate
+```
 
 Tested against DSH 0.2.1-rc.2. The plugin relies on client internals (`__reactFiber$`, `data-chat-flow-kind`, rendered blockquotes), so DSH upgrades may require adaptation. No network access, no telemetry. MIT licensed.
